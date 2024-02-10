@@ -1,0 +1,44 @@
+<p>Messages from localhost:8082 (separate flask app)</p>
+<ul id="event-messages">
+</ul>
+
+<p>Messages from Django</p>
+<ul id="event-messages2">        
+</ul>
+
+<hr/>
+
+
+<script>
+    const eventSource = new EventSource('http://localhost:8082/agents/123/event_stream');
+    
+    console.log(eventSource.readyState);
+    const eventElement = document.querySelector('#event-messages');
+
+    eventSource.onopen = function() {
+        console.log('Event stream connection opened');
+    }
+
+    eventSource.onmessage = function(e) {
+        eventElement.textContent = 'message: ' + e.data;
+    }
+
+    eventSource.addEventListener('pulse', e => {
+        eventElement.textContent = 'message: ' + e.data;
+    });
+
+
+    const eventSource2 = new EventSource('/api/assistants/123/events');
+    
+    console.log(eventSource2.readyState);
+    const eventElement2 = document.querySelector('#event-messages2');
+
+    eventSource2.onopen = function() {
+        console.log('Event stream2 connection opened');
+    }
+
+    eventSource.addEventListener('pulse', e => {
+        eventElement2.textContent = 'message: ' + e.data;
+    });
+
+</script>
