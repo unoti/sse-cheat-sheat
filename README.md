@@ -36,6 +36,7 @@ Create a url to provide server sent events
     * X-Accel-Buffering: no
     * Content-Type: text/event-stream
     * Cache-Control: no-cache
+    
 To produce an event, output like this
 ```
 event: my_event_name\n

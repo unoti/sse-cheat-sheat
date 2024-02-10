@@ -25,7 +25,7 @@ def agent_event_stream(agent_id):
         'agent_id': agent_id,
     }
     
-    # This function is an interator.
+    # This function is an iterator.
     # When you put an iterator into a flask Response, it streams.
     def event_stream():
         count = 0
